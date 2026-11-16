@@ -10,9 +10,6 @@ permissions:
   contents: read
   actions: read
 
-permissions:
-  contents: read
-
 jobs:
   build:
     runs-on: ubuntu-latest
