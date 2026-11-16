@@ -49,4 +49,5 @@ jobs:
           app-name: eshoponweb-github
           package: web
           resource-group-name: gh-200
+          
       
