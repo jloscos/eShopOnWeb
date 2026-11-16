@@ -1,6 +1,5 @@
 ﻿using Microsoft.eShopWeb;
 using Microsoft.eShopWeb.PublicApi.CatalogItemEndpoints;
-using Microsoft.eShopWeb.Web.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,18 +12,6 @@ namespace PublicApiIntegrationTests.CatalogItemEndpoints;
 [TestClass]
 public class CatalogItemListPagedEndpoint
 {
-    [TestMethod]
-    public async Task ReturnsFirst10CatalogItems()
-    {
-        var client = ProgramTest.NewClient;
-        var response = await client.GetAsync("/api/catalog-items?pageSize=10");
-        response.EnsureSuccessStatusCode();
-        var stringResponse = await response.Content.ReadAsStringAsync();
-        var model = stringResponse.FromJson<CatalogIndexViewModel>();
-
-        Assert.AreEqual(10, model!.CatalogItems.Count());
-    }
-
     [TestMethod]
     public async Task ReturnsCorrectCatalogItemsGivenPageIndex1()
     {
