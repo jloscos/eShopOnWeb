@@ -8,6 +8,10 @@ on:
 
 permissions:
   contents: read
+  actions: read
+
+permissions:
+  contents: read
 
 jobs:
   build:
