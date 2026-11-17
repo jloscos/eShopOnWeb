@@ -27,7 +27,7 @@ on:
     
 
 jobs:
-  exemple:
+  build:
     runs-on: ubuntu-latest
     name: 'Deploy to ${{ inputs.env }}'
     env: 
@@ -53,3 +53,14 @@ jobs:
           name: web
           path: publish
 
+  deploy-dev:
+    runs-on: ubuntu-latest
+    name: Deploy to dev
+    needs: build
+    environment: Dev
+    steps:
+      - name: download artifact
+        uses: actions/download-artifact@v7.0.2
+        with:
+          name: web
+          path: publish
