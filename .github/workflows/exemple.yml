@@ -33,6 +33,19 @@ jobs:
     steps:
       - uses: actions/checkout@v6.1.0
         name: Checkout the code
-      - run: |
-          echo "Value of exemeple: ${{inputs.exemple}}"
-      
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v6.1.0
+        with:
+          dotnet-version: 10.x
+      - name: dotnet restore
+        run: dotnet restore ./src/Web
+      - name: build
+        run: dotnet build ./src/Web --configuration Release
+      - name: publish
+        run: dotnet publish ./src/Web --configuration Release -o ./publish
+      - name: upload artifact
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: web
+          path: publish
+        
