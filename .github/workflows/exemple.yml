@@ -60,7 +60,18 @@ jobs:
     environment: Dev
     steps:
       - name: download artifact
-        uses: actions/download-artifact@v7.0.2
+        uses: actions/download-artifact@v8.0.2
         with:
           name: web
           path: publish
+      - name: Azure Login
+        uses: Azure/login@v3.0.2
+        with:
+          creds: ${{secrets.AZURE_CREDENTIALS}}
+      - name: Azure WebApp
+        uses: Azure/webapps-deploy@v3.0.8
+        with:
+          app-name: eshoponweb-github
+          package: publish
+          resource-group-name: gh-200
+
