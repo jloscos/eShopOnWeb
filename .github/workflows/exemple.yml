@@ -5,11 +5,25 @@ on:
     branches: 
       - main
   workflow_dispatch:
+    inputs:
+      exemple:
+        type: string
+        default: test
+        required: false
+      env:
+        type: choice
+        options:
+          - dev
+          - preprod
+          - prod
 
 jobs:
   exemple:
     runs-on: ubuntu-latest
+    name: 'Deploy to ${{ inputs.env }}'
     steps:
       - uses: actions/checkout@v6.1.0
         name: Checkout the code
+      - run: |
+          echo "Value of exemeple: ${{inputs.exemple}}"
       
