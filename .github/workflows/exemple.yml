@@ -30,6 +30,9 @@ jobs:
   exemple:
     runs-on: ubuntu-latest
     name: 'Deploy to ${{ inputs.env }}'
+    env: 
+      PROJECT_PATH: ./src/Web
+
     steps:
       - uses: actions/checkout@v6.1.0
         name: Checkout the code
@@ -37,15 +40,16 @@ jobs:
         uses: actions/setup-dotnet@v6.1.0
         with:
           dotnet-version: 10.x
+      
       - name: dotnet restore
-        run: dotnet restore ./src/Web
+        run: dotnet restore $PROJECT_PATH
       - name: build
-        run: dotnet build ./src/Web --configuration Release
+        run: dotnet build $PROJECT_PATH --configuration Release
       - name: publish
-        run: dotnet publish ./src/Web --configuration Release -o ./publish
+        run: dotnet publish $PROJECT_PATH --configuration Release -o ./publish
       - name: upload artifact
         uses: actions/upload-artifact@v7.0.2
         with:
           name: web
           path: publish
-        
+
