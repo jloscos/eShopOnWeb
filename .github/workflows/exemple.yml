@@ -2,6 +2,8 @@ name: Exemple Workflow
 
 on: 
   push:
+    paths:
+      - src/Web
     branches: 
       - main
   workflow_dispatch:
@@ -16,6 +18,13 @@ on:
           - dev
           - preprod
           - prod
+          
+  pull_request:
+    branches:
+      - main
+    paths:
+      - src/Web
+    
 
 jobs:
   exemple:
