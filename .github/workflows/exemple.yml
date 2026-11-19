@@ -20,10 +20,9 @@ on:
           - prod
           
   pull_request:
+    types: [opened, synchronize]
     branches:
       - main
-    paths:
-      - src/Web
     
 
 jobs:
