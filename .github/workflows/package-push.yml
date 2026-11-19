@@ -1,0 +1,23 @@
+name: publish nuget package
+
+on: 
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        required: true
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6.1.0
+      - uses: actions/setup-dotnet@v6.1.0
+        with:
+          dotnet-version: 10.x
+      - run: |
+          dotnet build ./src/BlazorShared --configuration Release
+      - run: |
+          dotnet pack ./src/BlazorShared --configuration Release --version ${{inputs.version}} --output ./publish
+      - run: |
+          dotnet nuget push ./publish/*.nupkg --source "https://nuget.pkg.github.com/jloscos/index.json" --api-key $GITHUB_TOKEN
