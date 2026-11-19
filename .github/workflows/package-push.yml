@@ -7,6 +7,9 @@ on:
         type: string
         required: true
 
+env:
+  version: ${{inputs.version}}-${{github.run_number}}
+
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
@@ -22,7 +25,7 @@ jobs:
           dotnet build ./src/BlazorShared --configuration Release
       - name: package
         run: |
-          dotnet pack ./src/BlazorShared --configuration Release --version ${{inputs.version}} --output ./publish
+          dotnet pack ./src/BlazorShared --configuration Release --version ${{env.version}} --output ./publish
       - name: push package
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
