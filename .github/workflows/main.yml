@@ -16,3 +16,9 @@ jobs:
               title: "exemple",
               body: "This issue was created by githubscript"
             });
+      - run: |
+          gh issue create --title "2nd issue" --body "issue create by github cli"
+        env:
+          GH_TOKEN: ${{github.token}}
+          GH_REPO: ${{github.repository}}
+          
