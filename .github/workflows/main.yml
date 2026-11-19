@@ -19,6 +19,6 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: "exemple",
-              body: ${{steps.container-action.outputs.message}}
+              body: "${{steps.container-action.outputs.message}}"
             });
 
