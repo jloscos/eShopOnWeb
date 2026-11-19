@@ -36,15 +36,12 @@ jobs:
     steps:
       - uses: actions/checkout@v6.1.0
         name: Checkout the code
-      - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v6.1.0
+      - name: build dotnet
+        uses: ./.github/actions/dotnet-build
         with:
           dotnet-version: 10.x
-      
-      - name: dotnet restore
-        run: dotnet restore $PROJECT_PATH
-      - name: build
-        run: dotnet build $PROJECT_PATH --configuration Release
+          project: $PROJECT_PATH
+
       - name: publish
         run: dotnet publish $PROJECT_PATH --configuration Release -o ./publish
       - name: upload artifact
