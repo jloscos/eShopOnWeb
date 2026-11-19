@@ -14,7 +14,7 @@ runs:
   # https://docs.github.com/en/actions/sharing-automations/creating-actions/creating-a-docker-container-action
   using: docker
   # 'docker://image:tag' uses pre-built image, 'Dockerfile' builds locally
-  image: .github/actions/container-action/Dockerfile  
+  image: ./Dockerfile  
   env:
     INPUT_NAME: ${{ inputs.name }}
 
