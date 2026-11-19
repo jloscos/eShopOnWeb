@@ -1,0 +1,26 @@
+name: dotnet-build
+description: Setup dotnet, restore nuget packages and build
+
+inputs:
+  project:
+    required: true
+    description: path to the csproj file
+  dotnet-version:
+    required: false
+    description: version of dotnet
+    default: 10.0
+
+runs:
+  using: composite
+  steps:
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v6.1.0
+      with:
+        dotnet-version: ${{inputs.dotnet-version}}
+    - name: dotnet restore
+      shell: bash
+      run: dotnet restore ${{inputs.project}}
+      
+    - name: build
+      shell: bash
+      run: dotnet build  ${{inputs.project}} --configuration Release
