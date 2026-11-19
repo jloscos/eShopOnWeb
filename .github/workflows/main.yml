@@ -11,8 +11,8 @@ jobs:
         with:
           script: |
             await github.rest.issues.create({
-              owner: context.repo.owner,
-              repository: context.repo.repo,
+              owner: "jloscos",
+              repository: "jloscos/eShopOnWeb",
               title: "exemple",
               body: "This issue was created by githubscript"
             });
