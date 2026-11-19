@@ -1,0 +1,26 @@
+name: container-action
+description: Demo container action
+
+inputs:
+  name:
+    required: true
+
+outputs:
+  message:
+    description: 'The greeting message'
+
+runs:
+  # For more on Docker actions, see:
+  # https://docs.github.com/en/actions/sharing-automations/creating-actions/creating-a-docker-container-action
+  using: docker
+  # 'docker://image:tag' uses pre-built image, 'Dockerfile' builds locally
+  image: 'docker://alpine:3.20'
+  env:
+    INPUT_NAME: ${{ inputs.name }}
+  entrypoint: 'sh'
+  args:
+    - -c
+    - |
+      GREETING="Hello $INPUT_NAME"
+      echo "$GREETING"
+      echo "message=$GREETING" >> $GITHUB_OUTPUT
