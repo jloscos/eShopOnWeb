@@ -1,0 +1,22 @@
+name: docker push
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  docker-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6.1.0
+      - uses: docker/setup-docker-action@v5.7.0
+      - uses: docker/login-action@v4.8.0
+        with:
+          registry: ghcr.io
+          username: "jloscos"
+          password: ${{secrets.GITHUB_TOKEN}}
+      - run: |
+          docker build -f ./src/Web/Dockerfile -t ghcr.io/jloscos/web:latest .
+      - run: |
+          docker push ghcr.io/jloscos/web:latest
+          
+        
