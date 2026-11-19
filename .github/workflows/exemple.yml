@@ -41,6 +41,8 @@ jobs:
         with:
           dotnet-version: 10.x
           project: $PROJECT_PATH
+      - name: run tests
+        run: dotnet test ./tests/UnitTestss
 
       - name: publish
         run: dotnet publish $PROJECT_PATH --configuration Release -o ./publish
