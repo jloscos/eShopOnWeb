@@ -10,7 +10,9 @@ jobs:
       - uses: actions/github-script@v9.0.0
         with:
           script: |
-            await github.rest.issues.createIssue({
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repository: context.repo.repo,
               title: "exemple",
               body: "This issue was created by githubscript"
             });
